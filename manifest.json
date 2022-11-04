@@ -1,5 +1,5 @@
 {
-    "name": "RBC Bank Account Balance Mask",
+    "name": "RBC Bank Account Balance Masker",
     "version": "0.0.1",
     "description": "An extension to simply mask account balances",
     "manifest_version": 3,
