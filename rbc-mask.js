@@ -20,8 +20,8 @@ function maskAccounts() {
     }
 }
 
-var target = document.querySelector('head > title');
-var observer = new window.WebKitMutationObserver(function(mutations) {
+const target = document.querySelector('head > title');
+const observer = new window.WebKitMutationObserver(function(mutations) {
     mutations.forEach(function() {
         maskAccounts();
     });

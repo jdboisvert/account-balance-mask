@@ -1,14 +1,22 @@
 {
-    "name": "Account Balance Masker",
-    "version": "0.0.1",
-    "description": "An extension to mask account balances",
-    "manifest_version": 3,
-    "author": "Jeffrey Boisvert",
-    "permissions": ["activeTab", "scripting", "storage"],
-    "content_scripts": [
-        {
-          "matches": ["https://www1.royalbank.com/*"],
-          "js": ["rbc-mask.js"]
-        }
-      ]
+  "name":"Account Balance Masker",
+  "version":"0.0.1",
+  "description":"An extension to mask account balances",
+  "manifest_version":3,
+  "author":"Jeffrey Boisvert",
+  "permissions":[
+     "activeTab",
+     "scripting",
+     "storage"
+  ],
+  "content_scripts":[
+     {
+        "matches":[
+           "https://www1.royalbank.com/*"
+        ],
+        "js":[
+           "rbc-mask.js"
+        ]
+     }
+  ]
 }
