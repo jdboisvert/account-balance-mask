@@ -1,14 +1,14 @@
 {
-    "name": "RBC Bank Account Balance Masker",
+    "name": "Account Balance Masker",
     "version": "0.0.1",
-    "description": "An extension to simply mask account balances",
+    "description": "An extension to mask account balances",
     "manifest_version": 3,
     "author": "Jeffrey Boisvert",
     "permissions": ["activeTab", "scripting", "storage"],
     "content_scripts": [
         {
           "matches": ["https://www1.royalbank.com/*"],
-          "js": ["script.js"]
+          "js": ["rbc-mask.js"]
         }
       ]
 }
