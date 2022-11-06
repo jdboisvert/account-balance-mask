@@ -22,6 +22,4 @@ Refer to the supported banking sites below or if a supported site is no longer w
 ## List of supported Financial Banking Sites 
 - [Personal Banking for Royal Bank of Canada (RBC)](https://www.rbcroyalbank.com/personal.html)
 
-  https://user-images.githubusercontent.com/40838156/200197454-b41a28db-ac66-47aa-bbb6-6b5b461486e3.mov
-
-
+    ![rbc-demo](https://user-images.githubusercontent.com/40838156/200197616-6efdf406-ceda-4355-aa86-bdcf12b80bcd.gif)
