@@ -1,6 +1,6 @@
 function maskAccounts() {
     const digitRegularExpression = /\d/;
-    const balanceAmountElements = document.querySelectorAll('[class^="balance"]');
+    const balanceAmountElements = document.querySelectorAll('[class*="balance"]');
     for (const balanceAmountElement of balanceAmountElements) {
         const originalContent = balanceAmountElement.innerHTML;
 
@@ -29,12 +29,18 @@ const observer = new window.WebKitMutationObserver(function(mutations) {
 observer.observe(target, { subtree: true, characterData: true, childList: true });
 
 function init() {
-    var checkInternal = setInterval(check, 111);
+    const start = new Date().getTime();
+    var checkInternal = setInterval(check, 100);
 
     function check() {
-        if (document.querySelectorAll('[class^="balance"]').length > 0) {
+        if (document.querySelectorAll('[class*="balance"]').length > 0) {
             clearInterval(checkInternal);
             maskAccounts();
+        }
+
+        if (new Date().getTime() - start > 15000) {
+            // Stop checking if it has not found anything after a set amount of time. 
+            clearInterval(checkInternal);
         }
     }
 };

@@ -1,6 +1,6 @@
 {
   "name":"Account Balance Masker",
-  "version":"0.0.1",
+  "version":"0.0.2",
   "description":"An extension to mask account balances",
   "manifest_version":3,
   "author":"Jeffrey Boisvert",
@@ -17,6 +17,14 @@
         "js":[
            "rbc-mask.js"
         ]
-     }
+     },
+     {
+      "matches":[
+         "https://www.tangerine.ca/app*"
+      ],
+      "js":[
+         "tangerine-mask.js"
+      ]
+   }
   ]
 }
