@@ -23,3 +23,8 @@ Refer to the supported banking sites below or if a supported site is no longer w
 - [Personal Banking for Royal Bank of Canada (RBC)](https://www.rbcroyalbank.com/personal.html)
 
     ![rbc-demo](https://user-images.githubusercontent.com/40838156/200197616-6efdf406-ceda-4355-aa86-bdcf12b80bcd.gif)
+    
+- [Tangerine Personal Banking](https://www.tangerine.ca/)
+
+    ![tangerine-demo](https://user-images.githubusercontent.com/40838156/201499082-5faa7384-9bf6-488f-92a8-c4ac95380a03.gif)
+
