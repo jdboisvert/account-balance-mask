@@ -1,23 +1,11 @@
-# Account Balance Mask
-A chrome extension which enables making of account balances when visiting certain financial websites. This extension is to help give you a little more privacy when doing your everyday banking in a browser. 
+# Account Balance Masker
+A chrome extension which enables masking of account balances when visiting certain financial websites. This extension is to help give you a little more privacy when doing your everyday banking in a browser. 
 
 ## Features
 
-- Masks the account balances upon loading the webpage of the supported financial banking websites. 
-- Unmasks the account balance by simply hovering over masked balance.
-- No tracking of the masked values.
-
-## Get started
-You must be using a Chromium-based browser in order to use this extension. 
-
-1. If you wish to use this application simply download this repository on your computer. 
-2. Go to your browser's extensions and find the `Load unpacked` option. 
-3. Click on this and direct it to where you downloaded this repository. 
-4. Ensure the extension is enabled (this should be the case by default). 
-5. Login to your banking application and test it out :).
-
-## Masking is not working? 
-Refer to the supported banking sites below or if a supported site is no longer working please enter a bug report on [GitHub Issues](https://github.com/jdboisvert/account-balance-mask/issues).
+- Masks the account balances upon loading the webpage of the supported financial banking websites (is shown as "****"). 
+- Unmasks the account balance by simply hovering over masked balance so you can see the original value.
+- No external tracking of the masked values. Everything remains within the browser. 
 
 ## List of supported Financial Banking Sites 
 - [Personal Banking for Royal Bank of Canada (RBC)](https://www.rbcroyalbank.com/personal.html)
@@ -27,4 +15,16 @@ Refer to the supported banking sites below or if a supported site is no longer w
 - [Tangerine Personal Banking](https://www.tangerine.ca/)
 
     ![tangerine-demo](https://user-images.githubusercontent.com/40838156/201499082-5faa7384-9bf6-488f-92a8-c4ac95380a03.gif)
+
+## Get started
+You must be using a Chromium-based browser in order to use this extension. 
+
+1. If you wish to use this application simply download this repository on your computer (via git or download the latest [published tag's](https://github.com/jdboisvert/account-balance-mask/tags) zip and unzip it anywhere you wish). 
+2. Go to your browser's extensions and find the `Load unpacked` option. 
+3. Click on this and direct it to where you downloaded this repository. 
+4. Ensure the extension is enabled (this should be the case by default). 
+5. Login to your banking application and test it out :).
+
+## Ran into a problem or have a question? 
+Refer to the supported banking sites above and if a supported site is no longer working or you wish to have a new feature please enter a report on [GitHub Issues](https://github.com/jdboisvert/account-balance-mask/issues).
 
