@@ -1,13 +1,12 @@
 {
   "name":"Account Balance Masker",
-  "version":"0.0.3",
+  "version":"0.0.4",
   "description":"An extension to mask account balances",
   "manifest_version":3,
   "author":"Jeffrey Boisvert",
   "permissions":[
      "activeTab",
-     "scripting",
-     "storage"
+     "scripting"
   ],
   "icons": {
    "128": "icon128.png"
