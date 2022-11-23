@@ -1,6 +1,6 @@
 {
   "name":"Account Balance Masker",
-  "version":"0.0.4",
+  "version":"0.0.5",
   "description":"An extension to mask account balances",
   "manifest_version":3,
   "author":"Jeffrey Boisvert",
@@ -26,7 +26,8 @@
          "https://www.tangerine.ca/app*"
       ],
       "js":[
-         "tangerine-mask.js"
+         "tangerine-mask.js",
+         "utils.js"
       ]
    }
   ]

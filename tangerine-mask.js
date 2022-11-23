@@ -1,91 +1,63 @@
-function maskAccounts() {
-    const digitRegularExpression = /\d/;
-    const balanceAmountElements = document.querySelectorAll('[class*="amount"]');
-    for (const balanceAmountElement of balanceAmountElements) {
-        const originalContent = balanceAmountElement.innerHTML;
+const querySelectorStringAccountAmount = '[class*="amount"]';
+const querySelectorStringAccountBalance = 'span[id*="account-balance"]';
+const querySelectorStringAccountDetailsBalance = 'div[id*="account-details-balance"]';
 
-        if (!digitRegularExpression.test(originalContent)) {
-            // Ignore since value does not contain digits.
-            continue
-        }
-        
-        balanceAmountElement.innerHTML = "****"; 
+const maxMillisecondsToSearch = 15000;
+const intervalAmount = 300;
 
-        balanceAmountElement.onmouseover = function() {
-            this.innerHTML = originalContent;
-        }
-        balanceAmountElement.onmouseout = function() {
-            this.innerHTML = "****";
-        }
-    }
-}
+/*
+ * Function used to mask the Tangerine amount details present on the homepage.
+ */
+const maskAccounts = () => {
+    maskObjects(querySelectorStringAccountAmount, maskObject);
+};
 
-function maskBalanceObjects() {
-    const digitRegularExpression = /\d/;
-    const accountBalances = document.querySelectorAll('span[id*="account-balance"]');
-    for (const balanceAmountElement of accountBalances) {
-        const originalContent = balanceAmountElement.innerHTML;
+/*
+ * Function used to mask the Tangerine balance details present on the homepage.
+ */
+const maskBalanceObjects = () => {
+    maskObjects(querySelectorStringAccountBalance, maskObject);
+};
 
-        if (!digitRegularExpression.test(originalContent)) {
-            // Ignore since value does not contain digits.
-            continue
-        }
-        
-        balanceAmountElement.innerHTML = "****"; 
-
-        balanceAmountElement.onmouseover = function() {
-            this.innerHTML = originalContent;
-        }
-        balanceAmountElement.onmouseout = function() {
-            this.innerHTML = "****";
-        }
-    }
-}
+/*
+ * Function used to mask the Tangerine balance details present on the account details page.
+ */
+const maskDetailsBalanceObjects = () => {
+    maskObjects(querySelectorStringAccountDetailsBalance, maskObject);
+};
 
 const target = document.querySelector('head > title');
 const observer = new window.WebKitMutationObserver(function(mutations) {
+    /**
+     * Observing page to check when items to mask are present
+     */
     const start = new Date().getTime();
-    const amountClassInterval = setInterval(checkAmountClasses, 300);
-    const balanceIdInterval = setInterval(checkBalanceIds, 300);
+    const amountClassInterval = setInterval(checkAmountClasses, intervalAmount);
+    const balanceIdInterval = setInterval(checkBalanceIds, intervalAmount);
+    const detailsBalanceIdInterval = setInterval(checkDetailsBalanceIds, intervalAmount);
+
     function checkAmountClasses() {
-        amountClasses = document.querySelectorAll('[class*="amount"]');
-        const digitRegularExpression = /\d/;
-
-        if (amountClasses.length > 0 && amountClasses[0].innerHTML == "****") {
-            clearInterval(amountClassInterval);
-        }
+        const checkFunction = (querySelectorString) => {
+            return areLoaded(querySelectorString) && isFirstItemADigit(querySelectorString);
+        };
         
-
-        if (amountClasses.length > 0 && digitRegularExpression.test(amountClasses[0].innerHTML)) {
-            // Only let it check for a total of 10 seconds. any longer it can be assumed it is missing.
-            clearInterval(amountClassInterval);
-            maskAccounts();
-        }
-
-        if (new Date().getTime() - start > 15000) {
-            // Stop checking if it has not found anything after a set amount of time. 
-            clearInterval(amountClassInterval);
-        }
+        searchForObjectsToMask(querySelectorStringAccountAmount, start, amountClassInterval, maskAccounts, checkFunction, maxMillisecondsToSearch);
     }
 
     function checkBalanceIds() {
-        balanceIds = document.querySelectorAll('[id*="account-balance"]');
-        const digitRegularExpression = /\d/;
-
-        if (balanceIds.length > 0 && balanceIds[0].innerHTML == "****") {
-            clearInterval(balanceIdInterval);
-        }
-
-        if (balanceIds.length > 0 && digitRegularExpression.test(balanceIds[0].innerHTML)) {
-            // Only let it check for a total of 10 seconds. any longer it can be assumed it is missing.
-            clearInterval(balanceIdInterval);
-            maskBalanceObjects();
-        }
-
-        if (new Date().getTime() - start > 15000) {
-            // Stop checking if it has not found anything after a set amount of time. 
-            clearInterval(balanceIdInterval);
-        }
+        const checkFunction = (querySelectorString) => {
+            return areLoaded(querySelectorString) && isFirstItemADigit(querySelectorString);
+        };
+        
+        searchForObjectsToMask(querySelectorStringAccountBalance, start, balanceIdInterval, maskBalanceObjects, checkFunction, maxMillisecondsToSearch);
+    }
+    
+    function checkDetailsBalanceIds() {
+        const checkFunction = (querySelectorString) => {
+            return areLoaded(querySelectorString) && isFirstItemADigit(querySelectorString);
+        };
+        
+        searchForObjectsToMask(querySelectorStringAccountDetailsBalance, start, detailsBalanceIdInterval, maskDetailsBalanceObjects, checkFunction, maxMillisecondsToSearch);
     }
 });
 observer.observe(target, { subtree: true, characterData: true, childList: true });
