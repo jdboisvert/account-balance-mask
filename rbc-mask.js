@@ -1,25 +1,14 @@
-function maskAccounts() {
-    const digitRegularExpression = /\d/;
-    const balanceAmountElements = document.querySelectorAll('[class*="balance"]');
-    for (const balanceAmountElement of balanceAmountElements) {
-        const originalContent = balanceAmountElement.innerHTML;
 
-        if (!digitRegularExpression.test(originalContent)) {
-            // Ignore since value does not contain digits.
-            continue
-        }
-        
-        balanceAmountElement.innerHTML = "****"; 
-
-        balanceAmountElement.onmouseover = function() {
-            this.innerHTML = originalContent;
-        }
-        balanceAmountElement.onmouseout = function() {
-            this.innerHTML = "****";
-        }
-    }
+/*
+ * Function used to mask the RBC balance details present on the page.
+ */
+const maskAccounts = () => {
+    maskObjects('[class*="balance"]', maskObject);
 }
 
+/*
+ * Function used to remove the balance details in the account drop downs.
+ */
 function maskAccountSelectionOptions() {
     const digitRegularExpression = /\d/;
     const balanceAmountElements = document.querySelectorAll('option');

@@ -17,7 +17,8 @@
            "https://www1.royalbank.com/*"
         ],
         "js":[
-           "rbc-mask.js"
+           "rbc-mask.js",
+           "utils.js"
         ]
      },
      {
