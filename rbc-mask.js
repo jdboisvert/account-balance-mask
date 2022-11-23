@@ -1,78 +1,62 @@
-function maskAccounts() {
-    const digitRegularExpression = /\d/;
-    const balanceAmountElements = document.querySelectorAll('[class*="balance"]');
-    for (const balanceAmountElement of balanceAmountElements) {
-        const originalContent = balanceAmountElement.innerHTML;
+const querySelectorStringBalance = '[class*="balance"]';
+const querySelectorStringDropdownOptions = 'option';
 
-        if (!digitRegularExpression.test(originalContent)) {
-            // Ignore since value does not contain digits.
-            continue
-        }
-        
-        balanceAmountElement.innerHTML = "****"; 
+const maxMillisecondsToSearch = 15000;
+const intervalAmount = 10;
 
-        balanceAmountElement.onmouseover = function() {
-            this.innerHTML = originalContent;
-        }
-        balanceAmountElement.onmouseout = function() {
-            this.innerHTML = "****";
-        }
+
+/*
+ * Function used to mask the RBC balance details present on the page.
+ */
+const maskAccounts = () => {
+    maskObjects(querySelectorStringBalance, maskObject);
+};
+
+/**
+ * Specific to the dropdown items that have account balances in them. 
+ * @param {*} htmlObject representing an object from the DOM
+ */
+const cleanDropdownAccountBalances = (htmlObject) => {
+    // We wish to simply show the account name not the balance. 
+    const currentInnerHTML = htmlObject.innerHTML; 
+
+    // Assuming it is formatted as "Account Name = $123.12"
+    const currentInnerHTMLElements = currentInnerHTML.split(" = ");
+    if (currentInnerHTMLElements.length > 1) {
+        htmlObject.innerHTML = currentInnerHTMLElements[0]; 
     }
-}
+};
 
-function maskAccountSelectionOptions() {
-    const digitRegularExpression = /\d/;
-    const balanceAmountElements = document.querySelectorAll('option');
-    for (const balanceAmountElement of balanceAmountElements) {
-        const originalContent = balanceAmountElement.innerHTML;
+/*
+ * Function used to remove the balance details in the account drop downs.
+ */
+const maskAccountSelectionOptions = () => {
+    maskObjects(querySelectorStringDropdownOptions, cleanDropdownAccountBalances);
 
-        if (!digitRegularExpression.test(originalContent)) {
-            // Ignore since value does not contain digits.
-            continue
-        }
-        
-        // We wish to simply show the account name not the balance. 
-        const currentInnerHTML = balanceAmountElement.innerHTML; 
-
-        // Assuming it is formatted as "Account Name = $123.12"
-        const currentInnerHTMLElements = currentInnerHTML.split(" = ");
-
-        if (currentInnerHTMLElements.length > 1) {
-            balanceAmountElement.innerHTML = currentInnerHTMLElements[0]; 
-        }
-    }
-}
+};
 
 const target = document.querySelector('head > title');
 const observer = new window.WebKitMutationObserver(function(mutations) {
+    /**
+     * Observing page to check when items to mask are present
+     */
     mutations.forEach(function() {
         const start = new Date().getTime();
-        const checkAccountBalancesInterval = setInterval(checkAccountBalances, 10);
-        const checkAccountOptionsInterval = setInterval(checkAccountOptions, 10);
-        const digitRegularExpression = /\d/;
+        const checkAccountBalancesInterval = setInterval(checkAccountBalances, intervalAmount);
+        const checkAccountOptionsInterval = setInterval(checkAccountOptions, intervalAmount);
     
         function checkAccountBalances() {
-            if (document.querySelectorAll('[class*="balance"]').length > 0) {
-                clearInterval(checkAccountBalancesInterval);
-                maskAccounts();
-            }
-    
-            if (new Date().getTime() - start > 15000) {
-                // Stop checking if it has not found anything after a set amount of time. 
-                clearInterval(checkAccountBalancesInterval);
-            }
+            const checkFunction = (querySelectorString) => {
+                return areLoaded(querySelectorString);
+            };
+            searchForObjectsToMask(querySelectorStringBalance, start, checkAccountBalancesInterval, maskAccounts, checkFunction, maxMillisecondsToSearch);
         }
-    
+
         function checkAccountOptions() {
-            if (document.querySelectorAll('option').length > 0 && digitRegularExpression.test(document.querySelectorAll('option')[0].innerHTML)) {
-                clearInterval(checkAccountOptionsInterval);
-                maskAccountSelectionOptions();
-            }
-    
-            if (new Date().getTime() - start > 15000) {
-                // Stop checking if it has not found anything after a set amount of time. 
-                clearInterval(checkAccountOptionsInterval);
-            }
+            const checkFunction = (querySelectorString) => {
+                return areLoaded(querySelectorString) && isFirstItemADigit(querySelectorString);
+            };
+            searchForObjectsToMask(querySelectorStringDropdownOptions, start, checkAccountOptionsInterval, maskAccountSelectionOptions, checkFunction, maxMillisecondsToSearch);
         }
     });
 });
