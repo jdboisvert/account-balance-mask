@@ -11,7 +11,7 @@ A chrome extension which enables masking of account balances when visiting certa
 
 ## Why is this useful?:
 - Privacy: This extension is useful for those who wish to have a little more privacy when doing their everyday banking in a browser in public or even at home (never know who may be peeking over your shoulder).
-- Such a simply thing for a developer to make: I wanted to make something simple and useful for the community and even though this is very simple for most Financial Institutions to implement they can be slow to do so.
+- Such a simple thing for a developer to make: I wanted to make something simple and useful for the community and even though this is very simple for most Financial Institutions to implement they can be slow to do so. So until then this can be the next best thing :). 
 
 ## How does this work?
 This extension works by using the [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) API to observe the DOM for changes. When a change is detected the extension will check if the change is a change to the account balance. If it is a change to the account balance then the extension will mask the value. 
