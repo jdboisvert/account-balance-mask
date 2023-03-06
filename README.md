@@ -17,6 +17,7 @@ A chrome extension which enables masking of account balances when visiting certa
     ![tangerine-demo](https://user-images.githubusercontent.com/40838156/201499082-5faa7384-9bf6-488f-92a8-c4ac95380a03.gif)
 
 - [Newton Crypto Banking](https://www.newton.co/dashboard)
+
     ![newton-crypto-demo](https://user-images.githubusercontent.com/40838156/223011525-f6220869-e660-47d4-966a-18acd2116fae.gif)
 
 
