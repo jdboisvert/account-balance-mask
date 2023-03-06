@@ -29,6 +29,15 @@
          "tangerine-mask.js",
          "utils.js"
       ]
+   },
+   {
+      "matches":[
+         "https://web.newton.co/dashboard"
+      ],
+      "js":[
+         "newton-crypto-mask.js",
+         "utils.js"
+      ]
    }
   ]
 }
