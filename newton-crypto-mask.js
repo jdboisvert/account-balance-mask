@@ -27,7 +27,7 @@ const observer = new window.WebKitMutationObserver(function(mutations) {
     const start = new Date().getTime();
     const portfolioValueInterval = setInterval(checkPortfolioValueId, defaultInterval);
     const accountAmountClassInterval = setInterval(checkAccountAmountClasses, defaultInterval);
-
+    
     function checkPortfolioValueId() {
         const checkFunction = (querySelectorString) => {
             return areLoaded(querySelectorString) && isFirstItemADigit(querySelectorString);
