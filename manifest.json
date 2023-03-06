@@ -1,6 +1,6 @@
 {
   "name":"Account Balance Masker",
-  "version":"0.0.5",
+  "version":"0.0.6",
   "description":"An extension to mask account balances",
   "manifest_version":3,
   "author":"Jeffrey Boisvert",
@@ -27,6 +27,15 @@
       ],
       "js":[
          "tangerine-mask.js",
+         "utils.js"
+      ]
+   },
+   {
+      "matches":[
+         "https://web.newton.co/dashboard"
+      ],
+      "js":[
+         "newton-crypto-mask.js",
          "utils.js"
       ]
    }
