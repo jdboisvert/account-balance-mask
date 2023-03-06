@@ -1,4 +1,6 @@
 # Account Balance Masker
+
+## What is this?
 A chrome extension which enables masking of account balances when visiting certain financial websites. This extension is to help give you a little more privacy when doing your everyday banking in a browser. 
 
 ## Features
@@ -6,6 +8,17 @@ A chrome extension which enables masking of account balances when visiting certa
 - Masks the account balances upon loading the webpage of the supported financial banking websites (is shown as "****"). 
 - Unmasks the account balance by simply hovering over masked balance so you can see the original value.
 - No external tracking of the masked values. Everything remains within the browser. 
+
+## Why is this useful?:
+- Privacy: This extension is useful for those who wish to have a little more privacy when doing their everyday banking in a browser in public or even at home (never know who may be peeking over your shoulder).
+- Such a simply thing for a developer to make: I wanted to make something simple and useful for the community and even though this is very simple for most Financial Institutions to implement they can be slow to do so.
+
+## How does this work?
+This extension works by using the [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) API to observe the DOM for changes. When a change is detected the extension will check if the change is a change to the account balance. If it is a change to the account balance then the extension will mask the value. 
+
+By leveraging the `manifest.json` file we can specify which websites this extension will be enabled on. This is done by specifying the `matches` property in the `manifest.json` file which ensures this extension is only enabled on the specified websites and not on any others. 
+
+Just set it and forget it and simply hover over the masked balance to see the original value. Simple, easy and effective.
 
 ## List of supported Financial Banking Sites 
 - [Personal Banking for Royal Bank of Canada (RBC)](https://www.rbcroyalbank.com/personal.html)
@@ -20,8 +33,10 @@ A chrome extension which enables masking of account balances when visiting certa
 
     ![newton-crypto-demo](https://user-images.githubusercontent.com/40838156/223011525-f6220869-e660-47d4-966a-18acd2116fae.gif)
 
+- More coming soon!
 
-## Get started
+
+## Get started locally. 
 You must be using a Chromium-based browser in order to use this extension. 
 
 1. If you wish to use this application simply download this repository on your computer (via git or download the latest [published tag's](https://github.com/jdboisvert/account-balance-mask/tags) zip and unzip it anywhere you wish). 
