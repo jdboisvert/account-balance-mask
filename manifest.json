@@ -1,6 +1,6 @@
 {
   "name":"Account Balance Masker",
-  "version":"0.0.6",
+  "version":"0.0.7",
   "description":"An extension to mask account balances",
   "manifest_version":3,
   "author":"Jeffrey Boisvert",
