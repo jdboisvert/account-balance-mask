@@ -1,7 +1,8 @@
 const querySelectorStringBalance = '[class*="balance"]';
-const querySelectorStringDropdownOptions = 'option';
+const querySelectorStringFromDropdown = 'select[id^="fromDropdown"]';
+const querySelectorStringToDropdown = 'select[id^="toDropdown"]';
 
-const maxMillisecondsToSearch = 15000;
+const maxMillisecondsToSearch = 5000;
 const intervalAmount = 10;
 
 
@@ -17,22 +18,36 @@ const maskAccounts = () => {
  * @param {*} htmlObject representing an object from the DOM
  */
 const cleanDropdownAccountBalances = (htmlObject) => {
-    // We wish to simply show the account name not the balance. 
-    const currentInnerHTML = htmlObject.innerHTML; 
+    if (!(htmlObject instanceof HTMLSelectElement)) {
+        // Only want to handle select elements
+        return;
+    }
 
-    // Assuming it is formatted as "Account Name = $123.12"
-    const currentInnerHTMLElements = currentInnerHTML.split(" = ");
-    if (currentInnerHTMLElements.length > 1) {
-        htmlObject.innerHTML = currentInnerHTMLElements[0]; 
+    for (var i = 0; i < htmlObject.options.length; i++) {
+        var option = htmlObject.options[i];
+        
+        // Assuming it is formatted as "Account Name = $123.12"
+        const currentInnerHTMLElements = option.innerHTML.split(" = ");
+        if (currentInnerHTMLElements.length > 1) {
+            // We want to remove the balance details from the account name
+            option.innerHTML = currentInnerHTMLElements[0]; 
+        }
+
     }
 };
 
 /*
- * Function used to remove the balance details in the account drop downs.
+ * Function used to remove the balance details in the from account dropdown.
  */
-const maskAccountSelectionOptions = () => {
-    maskObjects(querySelectorStringDropdownOptions, cleanDropdownAccountBalances);
+const maskFromAccountSelectOptions = () => {
+    maskObjects(querySelectorStringFromDropdown, cleanDropdownAccountBalances);
+};
 
+/*
+ * Function used to remove the balance details in the to account dropdown.
+ */
+const maskToAccountSelectOptions = () => {
+    maskObjects(querySelectorStringToDropdown, cleanDropdownAccountBalances);
 };
 
 const target = document.querySelector('head > title');
@@ -43,7 +58,9 @@ const observer = new window.WebKitMutationObserver(function(mutations) {
     mutations.forEach(function() {
         const start = new Date().getTime();
         const checkAccountBalancesInterval = setInterval(checkAccountBalances, intervalAmount);
-        const checkAccountOptionsInterval = setInterval(checkAccountOptions, intervalAmount);
+        const checkFromAccountDropdown = setInterval(checkFromAccountDropdownMask, intervalAmount);
+        const checkToAccountDropdown = setInterval(checkToAccountDropdownMask, intervalAmount);
+
     
         function checkAccountBalances() {
             const checkFunction = (querySelectorString) => {
@@ -52,11 +69,20 @@ const observer = new window.WebKitMutationObserver(function(mutations) {
             searchForObjectsToMask(querySelectorStringBalance, start, checkAccountBalancesInterval, maskAccounts, checkFunction, maxMillisecondsToSearch);
         }
 
-        function checkAccountOptions() {
+        function checkFromAccountDropdownMask() {
             const checkFunction = (querySelectorString) => {
-                return areLoaded(querySelectorString) && isFirstItemADigit(querySelectorString);
+                return areLoaded(querySelectorString);
             };
-            searchForObjectsToMask(querySelectorStringDropdownOptions, start, checkAccountOptionsInterval, maskAccountSelectionOptions, checkFunction, maxMillisecondsToSearch);
+            searchForObjectsToMask(querySelectorStringFromDropdown, start, checkFromAccountDropdown, maskFromAccountSelectOptions, checkFunction, maxMillisecondsToSearch);
+        }
+
+        function checkToAccountDropdownMask() {
+            const checkFunction = (querySelectorString) => {
+                console.log("Checking to account dropdown");
+                console.log(areLoaded(querySelectorString));
+                return areLoaded(querySelectorString);
+            };
+            searchForObjectsToMask(querySelectorStringToDropdown, start, checkToAccountDropdown, maskToAccountSelectOptions, checkFunction, maxMillisecondsToSearch);
         }
     });
 });

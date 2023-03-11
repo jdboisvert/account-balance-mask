@@ -2,7 +2,7 @@ const querySelectorPortfolioValue = '[id*="portfolio-value"]';
 const querySelectorStringAccountAmount = '[class*="sc-cXHkDB jLBty"]';
 
 
-const maxMillisecondsToSearch = 15000;
+const maxMillisecondsToSearch = 5000;
 const defaultInterval = 300;
 
 /*

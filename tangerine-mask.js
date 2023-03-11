@@ -2,7 +2,7 @@ const querySelectorStringAccountAmount = '[class*="amount"]';
 const querySelectorStringAccountBalance = 'span[id*="account-balance"]';
 const querySelectorStringAccountDetailsBalance = 'div[id*="account-details-balance"]';
 
-const maxMillisecondsToSearch = 15000;
+const maxMillisecondsToSearch = 5000;
 const intervalAmount = 300;
 
 /*

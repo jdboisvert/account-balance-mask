@@ -51,7 +51,7 @@ const maskObjects = (querySelectorString, maskFunction) => {
  */
  const searchForObjectsToMask = (querySelectorString, startTime, interval, maskFunction, checkFunction, maxMillisecondsToSearch) => {
     if (checkFunction(querySelectorString)) {
-        clearInterval(interval);
+        // Even if we found the item to mask since sometimes the items are loaded but not visible and reloaded we must keep masking
         maskFunction();
     }
 
