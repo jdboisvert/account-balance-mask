@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/40838156/224497646-e8029aaa-bd99-42f4-82a0-d00cdac8047e.png" width="250" height="250">
+  <img src="https://user-images.githubusercontent.com/40838156/224497646-e8029aaa-bd99-42f4-82a0-d00cdac8047e.png" height="250">
 </p>
 
 <h1 align="center">Account Balance Masker</h1>
