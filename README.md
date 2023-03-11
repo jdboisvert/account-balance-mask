@@ -1,4 +1,8 @@
-# Account Balance Masker
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/40838156/224497646-e8029aaa-bd99-42f4-82a0-d00cdac8047e.png" width="250" height="250">
+</p>
+
+<h1 align="center">Account Balance Masker</h1>
 
 ## What is this?
 A chrome extension which enables masking of account balances when visiting certain financial websites. This extension is to help give you a little more privacy when doing your everyday banking in a browser. 
