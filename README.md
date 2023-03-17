@@ -40,9 +40,15 @@ Just set it and forget it. Simple, easy and effective.
     ![newton-crypto-demo](https://user-images.githubusercontent.com/40838156/223011525-f6220869-e660-47d4-966a-18acd2116fae.gif)
 
 
-## Get started locally from this repository
+## How to install
 You must be using a Chromium-based browser in order to use this extension. 
 
+### Install from the Chrome Web Store
+1. Go to the [Account Balance Masker](https://chrome.google.com/webstore/detail/account-balance-masker/hkmponiffpfpnjbgddecfhneaajddfff?hl=en) extension page on the Chrome Web Store.
+2. Click on the `Add to Chrome` button.
+3. Login to your banking application and test it out :).
+
+###  Get started locally from this repository
 1. If you wish to use this application simply download this repository on your computer (via git or download the latest [published tag's](https://github.com/jdboisvert/account-balance-mask/tags) zip and unzip it anywhere you wish). 
 2. Go to your browser's extensions and find the `Load unpacked` option. 
 3. Click on this and direct it to where you downloaded this repository. 
