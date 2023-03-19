@@ -2,24 +2,24 @@ const querySelectorStringAccountAmount = '[class*="amount"]';
 const querySelectorStringAccountBalance = 'span[id*="account-balance"]';
 const querySelectorStringAccountDetailsBalance = 'div[id*="account-details-balance"]';
 
-const maxMillisecondsToSearch = 5000;
+const maxMillisecondsToSearch = 15000;
 const intervalAmount = 300;
 
-/*
+/**
  * Function used to mask the Tangerine amount details present on the homepage.
  */
 const maskAccounts = () => {
     maskObjects(querySelectorStringAccountAmount, maskObject);
 };
 
-/*
+/**
  * Function used to mask the Tangerine balance details present on the homepage.
  */
 const maskBalanceObjects = () => {
     maskObjects(querySelectorStringAccountBalance, maskObject);
 };
 
-/*
+/**
  * Function used to mask the Tangerine balance details present on the account details page.
  */
 const maskDetailsBalanceObjects = () => {
@@ -27,10 +27,8 @@ const maskDetailsBalanceObjects = () => {
 };
 
 const target = document.querySelector('head > title');
-const observer = new window.WebKitMutationObserver(function(mutations) {
-    /**
-     * Observing page to check when items to mask are present
-     */
+const observer = new window.WebKitMutationObserver((mutations) => {
+    // Observing page to check when items to mask are present
     const start = new Date().getTime();
     const amountClassInterval = setInterval(checkAmountClasses, intervalAmount);
     const balanceIdInterval = setInterval(checkBalanceIds, intervalAmount);
@@ -61,6 +59,3 @@ const observer = new window.WebKitMutationObserver(function(mutations) {
     }
 });
 observer.observe(target, { subtree: true, characterData: true, childList: true });
-
-
-
