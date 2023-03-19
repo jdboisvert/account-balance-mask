@@ -1,4 +1,4 @@
-const digitRegularExpression = /\d/;
+const digitRegularExpression = /[\d,]+(\.\d{1,2})?/;
 const maskingValue = "****";
 
 /**
@@ -11,19 +11,19 @@ const maskObject = (htmlObject) => {
 
     if (!digitRegularExpression.test(originalContent)) {
         // Ignore since value does not contain digits.
-        return
+        return;
     }
     
-    htmlObject.innerHTML = maskingValue; 
+    htmlObject.innerHTML = maskingValue;
 
-    htmlObject.onmouseover = function() {
-        this.innerHTML = originalContent;
-    }
-    htmlObject.onmouseout = function() {
-        this.innerHTML = maskingValue;
-    }
+    htmlObject.addEventListener('mouseover', () => {
+        htmlObject.innerHTML = originalContent;
+    });
+
+    htmlObject.addEventListener('mouseout', () => {
+        htmlObject.innerHTML = maskingValue;
+    });
 };
-
 
 /**
  * Function used to mask several HTML objects that 
@@ -49,14 +49,12 @@ const maskObjects = (querySelectorString, maskFunction) => {
  * @param {*} checkFunction handles checking if the objects have been found (takes as input the querySelectorString)
  * @param {*} maxMillisecondsToSearch an integer of milliseconds that should be spent searching
  */
- const searchForObjectsToMask = (querySelectorString, startTime, interval, maskFunction, checkFunction, maxMillisecondsToSearch) => {
+const searchForObjectsToMask = (querySelectorString, startTime, interval, maskFunction, checkFunction, maxMillisecondsToSearch) => {
     if (checkFunction(querySelectorString)) {
-        // Even if we found the item to mask since sometimes the items are loaded but not visible and reloaded we must keep masking
         maskFunction();
     }
 
     if (new Date().getTime() - startTime > maxMillisecondsToSearch) {
-        // Stop checking if it has not found anything after a set amount of time. 
         clearInterval(interval);
     }
 };
@@ -68,7 +66,7 @@ const maskObjects = (querySelectorString, maskFunction) => {
  * @returns true if first item is a digit false otherwise
  */
 const areLoaded = (querySelectorString) => {
-    return document.querySelectorAll(querySelectorString).length > 0
+    return document.querySelectorAll(querySelectorString).length > 0;
 };
 
 /**
