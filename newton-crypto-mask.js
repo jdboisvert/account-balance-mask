@@ -1,29 +1,26 @@
 const querySelectorPortfolioValue = '[id*="portfolio-value"]';
 const querySelectorStringAccountAmount = '[class*="sc-cXHkDB jLBty"]';
 
-
-const maxMillisecondsToSearch = 5000;
+const maxMillisecondsToSearch = 15000;
 const defaultInterval = 300;
 
-/*
+/**
  * Function used to mask the total Portfolio Value present on the dashboard.
  */
 const maskPortfolioValue = () => {
     maskObjects(querySelectorPortfolioValue, maskObject);
 };
 
-/*
-* Function used to mask the account amounts present on the dashboard.
-*/
+/**
+ * Function used to mask the account amounts present on the dashboard.
+ */
 const maskAccountAmounts = () => {
     maskObjects(querySelectorStringAccountAmount, maskObject);
 };
 
 const target = document.querySelector('head > title');
-const observer = new window.WebKitMutationObserver(function(mutations) {
-    /**
-     * Observing page to check when items to mask are present
-     */
+const observer = new window.WebKitMutationObserver((mutations) => {
+    // Observing page to check when items to mask are present
     const start = new Date().getTime();
     const portfolioValueInterval = setInterval(checkPortfolioValueId, defaultInterval);
     const accountAmountClassInterval = setInterval(checkAccountAmountClasses, defaultInterval);
@@ -45,6 +42,3 @@ const observer = new window.WebKitMutationObserver(function(mutations) {
     }
 });
 observer.observe(target, { subtree: true, characterData: true, childList: true });
-
-
-
